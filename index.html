@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吉林分公司区划调整战略信息图 - 单页版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #2d3748;
+            line-height: 1.4;
+            padding: 10px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+            min-height: calc(100vh - 20px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 25px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-left: 4px solid #ff6b35;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .card h2 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card h2::before {
+            content: '▶';
+            color: #ff6b35;
+            font-size: 0.7em;
+        }
+
+        .reason-item {
+            margin-bottom: 12px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 3px solid #ff6b35;
+        }
+
+        .reason-title {
+            font-weight: 600;
+            color: #ff6b35;
+            margin-bottom: 5px;
+            font-size: 1em;
+        }
+
+        .store-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .store-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .store-number {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+
+        .target-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        .target-item {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .target-region {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .target-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .target-growth {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .progress-container {
+            margin: 10px 0;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            margin: 8px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b35, #f7931e);
+            border-radius: 3px;
+            transition: width 1s ease;
+        }
+
+        .map-container {
+            height: 200px;
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            border-radius: 10px;
+            margin: 15px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .region-marker {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: rgba(255,107,53,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .stat-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #ff6b35;
+        }
+
+        .footer {
+            background: #2d3748;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .footer p {
+            opacity: 0.8;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .store-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 打印优化 */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+            .card {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>吉林分公司区划调整战略</h1>
+            <p>优化运营体系 · 提升市场份额 · 实现战略目标</p>
+        </div>
+
+        <div class="main-content">
+            <!-- 左栏 -->
+            <div class="column">
+                <!-- 转区划核心理由 -->
+                <div class="card">
+                    <h2>转区划核心理由</h2>
+                    <div class="reason-item">
+                        <div class="reason-title">运营适配性不足</div>
+                        <div>CAPA小、销售规模小，难搭建层级客户体系</div>
+                    </div>
+                    <div class="reason-item">
+                        <div class="reason-title">管理存在短板</div>
+                        <div>运营商无专人跟进，销量流失严重</div>
+                    </div>
+                    <div class="reason-item">
+                        <div class="reason-title">地理适配优化</div>
+                        <div>目标区域距吉林相近，便于区域协调</div>
+                    </div>
+                </div>
+
+                <!-- 门店布局 -->
+                <div class="card">
+                    <h2>门店布局规划</h2>
+                    <div class="store-grid">
+                        <div class="store-item">
+                            <div class="store-number">7</div>
+                            <div>存量门店</div>
+                        </div>
+                        <div class="store-item">
+                            <div class="store-number">+5</div>
+                            <div>新建门店</div>
+                        </div>
+                        <div class="store-item">
+                            <div class="store-number">12</div>
+                            <div>总门店数</div>
+                        </div>
+                    </div>
+                    <div class="reason-item">
+                        <div class="reason-title">核心商圈</div>
+                        <div>双辽新市街、金亿广场、伊通大街加密布局</div>
+                    </div>
+                </div>
+
+                <!-- 核心目标 -->
+                <div class="card">
+                    <h2>MS核心目标</h2>
+                    <div class="target-item">
+                        <div class="target-region">整体目标</div>
+                        <div class="target-value">4.1% → 15%</div>
+                        <div class="target-growth">市场份额提升266%</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 27.3%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右栏 -->
+            <div class="column">
+                <!-- 区域目标 -->
+                <div class="card">
+                    <h2>区域目标分解</h2>
+                    <div class="target-grid">
+                        <div class="target-item">
+                            <div class="target-region">双辽</div>
+                            <div class="target-value">6.7% → 16.5%</div>
+                            <div class="target-growth">月均420台</div>
+                        </div>
+                        <div class="target-item">
+                            <div class="target-region">梨树</div>
+                            <div class="target-value">3.0% → 13.9%</div>
+                            <div class="target-growth">月均400台</div>
+                        </div>
+                        <div class="target-item">
+                            <div class="target-region">伊通</div>
+                            <div class="target-value">2.3% → 13.3%</div>
+                            <div class="target-growth">月均240台</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 核心客户培育 -->
+                <div class="card">
+                    <h2>核心客户培育</h2>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">3家</div>
+                            <div>潜力客户</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">360台</div>
+                            <div>月均目标</div>
+                        </div>
+                    </div>
+                    <div class="reason-item">
+                        <div class="reason-title">进阶策略</div>
+                        <div>双辽、梨树冲击卓越，伊通冲击优秀</div>
+                    </div>
+                </div>
+
+                <!-- 区域布局 -->
+                <div class="card">
+                    <h2>区域战略布局</h2>
+                    <div class="map-container">
+                        <div class="region-marker" style="top: 30%; left: 40%;">双辽</div>
+                        <div class="region-marker" style="top: 50%; left: 60%;">梨树</div>
+                        <div class="region-marker" style="top: 70%; left: 45%;">伊通</div>
+                    </div>
+                    <div class="reason-item">
+                        <div class="reason-title">战略重点</div>
+                        <div>聚焦三大核心区域，实现精准投放</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>吉林分公司 · 2026年区划调整战略</strong></p>
+            <p>目标：市场份额从4.1%提升至15%，打造区域市场领导地位</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 进度条动画
+            setTimeout(() => {
+                document.querySelector('.progress-fill').style.width = '100%';
+            }, 500);
+
+            // 区域标记动画
+            const markers = document.querySelectorAll('.region-marker');
+            markers.forEach((marker, index) => {
+                marker.style.animationDelay = `${index * 0.3}s`;
+            });
+
+            // 悬停效果
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
