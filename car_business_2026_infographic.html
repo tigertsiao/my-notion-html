@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>车业务 2026 提升规划</title>
+    <style>
+        :root {
+            --car-blue: #2196F3;
+            --car-green: #4CAF50;
+            --xiaomi-orange: #FF6900;
+            --dark-bg: #1a1a1a;
+            --card-bg: #2a2a2a;
+            --text-white: #ffffff;
+            --text-gray: #b0b0b0;
+            --accent-gradient: linear-gradient(135deg, #2196F3 0%, #00BCD4 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-white);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #222;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(to right, #141e30, #243b55);
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::after {
+            content: 'SU7';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 15em;
+            font-weight: 900;
+            color: rgba(255,255,255,0.03);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: var(--text-gray);
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Grid Layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid #333;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--car-blue);
+        }
+
+        .card-title {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            color: var(--car-blue);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Section 1: Core Goals (Full Width) */
+        .goals-section {
+            grid-column: span 12;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            background: rgba(33, 150, 243, 0.1);
+            border: 1px solid rgba(33, 150, 243, 0.3);
+        }
+
+        .goal-item {
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .goal-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .goal-label {
+            color: var(--text-gray);
+            font-size: 0.9em;
+        }
+
+        /* Section 2: Store Strategy (Left) */
+        .store-section {
+            grid-column: span 6;
+        }
+
+        .tier-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .tier-item {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #555;
+        }
+
+        .tier-1 { border-left-color: #FFD700; background: rgba(255, 215, 0, 0.1); }
+        .tier-2 { border-left-color: #C0C0C0; }
+        .tier-3 { border-left-color: #cd7f32; } /* Bronze/Paused */
+
+        .tier-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .tier-content {
+            font-size: 0.9em;
+            color: var(--text-gray);
+        }
+
+        /* Section 3: Synergy (Right) */
+        .synergy-section {
+            grid-column: span 6;
+        }
+
+        .synergy-cycle {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .synergy-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .synergy-icon {
+            background: var(--car-green);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            flex-shrink: 0;
+        }
+
+        /* Section 4: Regional Strategy (Full Width) */
+        .regional-section {
+            grid-column: span 12;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .region-card {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .region-changchun {
+            border: 1px solid var(--car-blue);
+        }
+
+        .region-others {
+            border: 1px solid var(--text-gray);
+        }
+
+        .region-bg-icon {
+            position: absolute;
+            right: -20px;
+            bottom: -20px;
+            font-size: 8em;
+            opacity: 0.1;
+        }
+
+        /* Section 5: Weekly Review (Full Width) */
+        .review-section {
+            grid-column: span 12;
+        }
+
+        .role-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .role-card {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .role-title {
+            color: var(--xiaomi-orange);
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 5px;
+        }
+
+        .role-list {
+            list-style: none;
+            font-size: 0.85em;
+            color: var(--text-gray);
+        }
+
+        .role-list li {
+            margin-bottom: 5px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .role-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--xiaomi-orange);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 0.9em;
+            background: #1a1a1a;
+            border-top: 1px solid #333;
+        }
+
+        @media (max-width: 768px) {
+            .store-section, .synergy-section, .regional-section {
+                grid-column: span 12;
+            }
+            .regional-section {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>车业务 2026 提升规划</h1>
+            <p>聚焦市场份额提升路径 · 3C+车业务深度联动 · 区域差异化布局</p>
+        </div>
+
+        <div class="grid-container">
+            <!-- Core Goals -->
+            <div class="card goals-section">
+                <div class="goal-item">
+                    <div class="goal-value">XXXX台</div>
+                    <div class="goal-label">2026年锁单目标</div>
+                </div>
+                <div class="goal-item">
+                    <div class="goal-value">X家</div>
+                    <div class="goal-label">融合店建设</div>
+                </div>
+                <div class="goal-item">
+                    <div class="goal-value">4个</div>
+                    <div class="goal-label">核心商圈布局</div>
+                </div>
+                <div class="goal-item">
+                    <div class="goal-value">TBD</div>
+                    <div class="goal-label">3C联动占比</div>
+                </div>
+            </div>
+
+            <!-- Store Strategy -->
+            <div class="card store-section">
+                <div class="card-title">🏢 融合店建设规划 (短期不新建)</div>
+                <div class="tier-list">
+                    <div class="tier-item tier-1">
+                        <div class="tier-header">
+                            <span>🏆 第一梯队：传信 (优先赋能)</span>
+                            <span style="color: #FFD700">P0级重点</span>
+                        </div>
+                        <div class="tier-content">
+                            <p><strong>店铺：</strong>欧亚卖场融合店</p>
+                            <p><strong>时间：</strong>2026年1月24日开业 (Q2装修/Q3开业? 需确认)</p>
+                            <p><strong>优势：</strong>核心商圈，3C+车天然流量池</p>
+                        </div>
+                    </div>
+                    <div class="tier-item tier-2">
+                        <div class="tier-header">
+                            <span>🥈 第二梯队：捷立达</span>
+                        </div>
+                        <div class="tier-content">
+                            <p><strong>店铺1：</strong>现有车店 (运营优化)</p>
+                            <p><strong>店铺2：</strong>硅谷大街 2S (售后产值扶持)</p>
+                        </div>
+                    </div>
+                    <div class="tier-item tier-3">
+                        <div class="tier-header">
+                            <span>⏸️ 暂缓梯队</span>
+                        </div>
+                        <div class="tier-content">
+                            <p>百思买、信通</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Synergy Strategy -->
+            <div class="card synergy-section">
+                <div class="card-title">🔄 3C + 车业务联动 (核心突破)</div>
+                <div class="synergy-cycle">
+                    <div class="synergy-item">
+                        <div class="synergy-icon">⚡</div>
+                        <div>
+                            <h4>1. 流量互通机制</h4>
+                            <p style="font-size: 0.9em; color: #aaa;">3C门店导流 ⇄ 车业务反哺</p>
+                        </div>
+                    </div>
+                    <div class="synergy-item">
+                        <div class="synergy-icon">📢</div>
+                        <div>
+                            <h4>2. 市场活动联动</h4>
+                            <ul style="font-size: 0.9em; color: #aaa; padding-left: 15px;">
+                                <li>新品发布 (如17 Ultra)：车主优先权</li>
+                                <li>年货节/618：联合套餐 (手机+保养)</li>
+                                <li>周末商圈：小米生态体验日</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="synergy-item">
+                        <div class="synergy-icon">📊</div>
+                        <div>
+                            <h4>3. 数据追踪与复盘</h4>
+                            <p style="font-size: 0.9em; color: #aaa;">建立专项看板：转化率、反哺GMV、活动ROI</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Regional Strategy -->
+            <div class="card regional-section">
+                <div class="card-title" style="grid-column: span 2;">🗺️ 区域差异化布局</div>
+                
+                <div class="region-card region-changchun">
+                    <div class="region-bg-icon">🏙️</div>
+                    <h3 style="color: var(--car-blue); margin-bottom: 10px;">核心先锋城：长春</h3>
+                    <p style="font-size: 2em; font-weight: bold; margin-bottom: 10px;">≥60% <span style="font-size: 0.5em; font-weight: normal;">(约3100台)</span></p>
+                    <ul style="font-size: 0.9em; color: #ccc; padding-left: 20px;">
+                        <li><strong>策略：</strong>融合店密集布局 + 商圈声量最大化</li>
+                        <li><strong>布局：</strong>4家融合店 (欧亚/万象/摩天/待定)</li>
+                        <li><strong>动作：</strong>每月至少2场大型商圈联动</li>
+                    </ul>
+                </div>
+
+                <div class="region-card region-others">
+                    <div class="region-bg-icon">🛣️</div>
+                    <h3 style="color: var(--car-green); margin-bottom: 10px;">其他地市：轻量化触点</h3>
+                    <p style="font-size: 2em; font-weight: bold; margin-bottom: 10px;">≥20% <span style="font-size: 0.5em; font-weight: normal;">(约1100台)</span></p>
+                    <ul style="font-size: 0.9em; color: #ccc; padding-left: 20px;">
+                        <li><strong>策略：</strong>线上预约 + 长春试驾 + 临时展厅</li>
+                        <li><strong>四平/辽源/梅河口：</strong>仅做预约触点</li>
+                        <li><strong>吉林/通化/延吉/松原：</strong>长期临时展厅</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Weekly Review -->
+            <div class="card review-section">
+                <div class="card-title">📅 周会专项复盘框架</div>
+                <div class="role-grid">
+                    <div class="role-card">
+                        <div class="role-title">城市经理</div>
+                        <ul class="role-list">
+                            <li>市场大盘规划与走势分析</li>
+                            <li>组织能力建设与人员储备</li>
+                            <li>下周重点车型/活动规划</li>
+                        </ul>
+                    </div>
+                    <div class="role-card">
+                        <div class="role-title">BA (业务分析)</div>
+                        <ul class="role-list">
+                            <li>数据异常识别 (高客流低转化)</li>
+                            <li>融合店试驾转化分析</li>
+                            <li>针对性整改方向与竞争分析</li>
+                        </ul>
+                    </div>
+                    <div class="role-card">
+                        <div class="role-title">市场部</div>
+                        <ul class="role-list">
+                            <li>活动策划提升与声量扩大</li>
+                            <li>联动活动优劣势复盘</li>
+                            <li>新媒体/KOL联动计划</li>
+                        </ul>
+                    </div>
+                    <div class="role-card">
+                        <div class="role-title">运营支持</div>
+                        <ul class="role-list">
+                            <li>门店人员配置与能力识别</li>
+                            <li>卖场环境与动线优化</li>
+                            <li>外展活动执行支持</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>生成时间: 2026-01-05 | 基于《车业务2026提升规划》</p>
+            <p>Mi Code 智能生成</p>
+        </div>
+    </div>
+</body>
+</html>
